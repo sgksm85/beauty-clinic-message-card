@@ -17,14 +17,14 @@
 
 Management UIの「Code」パネルから「Download All Files」でプロジェクトをダウンロードし、GitHubにアップロードします。
 
-\`\`\`bash
+```bash
 # ダウンロードしたプロジェクトディレクトリで実行
 git init
 git add .
 git commit -m "Initial commit"
 git remote add origin https://github.com/あなたのユーザー名/リポジトリ名.git
 git push -u origin main
-\`\`\`
+```
 
 ---
 
@@ -39,13 +39,13 @@ git push -u origin main
 
 | 項目 | 値 |
 |------|-----|
-| Name | beauty-message-card-api（任意） |
-| Region | Singapore または Oregon（近い方） |
-| Branch | main |
-| Runtime | Node |
-| Build Command | pnpm install && pnpm run build |
-| Start Command | pnpm start |
-| Instance Type | Free |
+| Name | `beauty-message-card-api`（任意） |
+| Region | `Singapore` または `Oregon`（近い方） |
+| Branch | `main` |
+| Runtime | `Node` |
+| Build Command | `npm install && npm run build` |
+| Start Command | `npm start` |
+| Instance Type | `Free` |
 
 ### 2-2. 環境変数を設定
 
@@ -53,9 +53,9 @@ git push -u origin main
 
 | Key | Value |
 |-----|-------|
-| NODE_ENV | production |
-| DATABASE_URL | postgresql://...（ManusのDatabaseパネルから取得） |
-| PORT | 3000 |
+| `NODE_ENV` | `production` |
+| `DATABASE_URL` | `postgresql://...`（ManusのDatabaseパネルから取得） |
+| `PORT` | `3000` |
 
 ### 2-3. デプロイ実行
 
@@ -65,11 +65,11 @@ git push -u origin main
 
 デプロイ完了後、以下のようなURLが発行されます:
 
-\`\`\`
+```
 https://beauty-message-card-api.onrender.com
-\`\`\`
+```
 
-このURLをメモしてください（次のステップで使用します）。
+このURLを**メモしてください**（次のステップで使用します）。
 
 ---
 
@@ -84,10 +84,10 @@ https://beauty-message-card-api.onrender.com
 
 | 項目 | 値 |
 |------|-----|
-| Framework Preset | Other |
-| Build Command | pnpm run export:web |
-| Output Directory | dist |
-| Install Command | pnpm install |
+| Framework Preset | `Other` |
+| Build Command | `npm run export:web` |
+| Output Directory | `dist` |
+| Install Command | `npm install` |
 
 ### 3-2. 環境変数を設定
 
@@ -95,9 +95,9 @@ https://beauty-message-card-api.onrender.com
 
 | Key | Value | 説明 |
 |-----|-------|------|
-| EXPO_PUBLIC_API_BASE_URL | https://beauty-message-card-api.onrender.com | ステップ2-4で取得したURL |
+| `EXPO_PUBLIC_API_BASE_URL` | `https://beauty-message-card-api.onrender.com` | ステップ2-4で取得したURL |
 
-**重要**: \`DATABASE_URL\` はフロントエンドには設定しないでください（セキュリティ上の理由）。
+**重要**: `DATABASE_URL` はフロントエンドには**設定しない**でください（セキュリティ上の理由）。
 
 ### 3-3. デプロイ実行
 
@@ -107,9 +107,9 @@ https://beauty-message-card-api.onrender.com
 
 デプロイ完了後、以下のようなURLが発行されます:
 
-\`\`\`
+```
 https://your-project.vercel.app
-\`\`\`
+```
 
 ---
 
@@ -128,7 +128,7 @@ https://your-project.vercel.app
 ### Vercel（フロントエンド）
 
 1. Vercel Settings → Domains
-2. カスタムドメインを追加（例: card.beauty-clinic.jp）
+2. カスタムドメインを追加（例: `card.beauty-clinic.jp`）
 3. DNSにCNAMEレコードを設定:
 
 | タイプ | ホスト名 | 値 | TTL |
@@ -138,15 +138,15 @@ https://your-project.vercel.app
 ### Render.com（バックエンド）
 
 1. Render Settings → Custom Domain
-2. カスタムドメインを追加（例: api.beauty-clinic.jp）
+2. カスタムドメインを追加（例: `api.beauty-clinic.jp`）
 3. DNSにCNAMEレコードを設定:
 
 | タイプ | ホスト名 | 値 | TTL |
 |--------|----------|-----|-----|
 | CNAME | api | your-app.onrender.com | 3600 |
 
-4. Vercelの環境変数 \`EXPO_PUBLIC_API_BASE_URL\` を更新:
-   - \`https://api.beauty-clinic.jp\`
+4. Vercelの環境変数 `EXPO_PUBLIC_API_BASE_URL` を更新:
+   - `https://api.beauty-clinic.jp`
 
 ---
 
@@ -157,7 +157,7 @@ https://your-project.vercel.app
 **原因**: バックエンドURLが正しく設定されていない
 
 **解決策**:
-1. Vercelの環境変数 \`EXPO_PUBLIC_API_BASE_URL\` が正しいか確認
+1. Vercelの環境変数 `EXPO_PUBLIC_API_BASE_URL` が正しいか確認
 2. Render.comのバックエンドが正常に起動しているか確認
 3. ブラウザの開発者ツール（F12）でネットワークタブを確認
 
@@ -165,11 +165,12 @@ https://your-project.vercel.app
 
 **原因**: バックエンドのCORS設定が不足
 
-**解決策**: バックエンドの \`server/_core/index.ts\` でCORS設定が有効になっているか確認（既に設定済みのはずです）
+**解決策**:
+バックエンドの `server/_core/index.ts` でCORS設定が有効になっているか確認（既に設定済みのはずです）
 
 ### データベース接続エラー
 
-**原因**: Render.comの環境変数 \`DATABASE_URL\` が正しくない
+**原因**: Render.comの環境変数 `DATABASE_URL` が正しくない
 
 **解決策**:
 1. ManusのDatabaseパネルで接続文字列を確認
@@ -180,8 +181,8 @@ https://your-project.vercel.app
 
 ## コスト
 
-- Render.com Free Tier: 月750時間無料（1つのサービスで十分）
-- Vercel Free Tier: 月100GBまで無料
+- **Render.com Free Tier**: 月750時間無料（1つのサービスで十分）
+- **Vercel Free Tier**: 月100GBまで無料
 
 どちらも無料プランで十分に運用可能です。
 
@@ -191,11 +192,11 @@ https://your-project.vercel.app
 
 GitHubにプッシュすると、Render.comとVercelが自動的に再デプロイします:
 
-\`\`\`bash
+```bash
 git add .
 git commit -m "Update message"
 git push
-\`\`\`
+```
 
 ---
 
